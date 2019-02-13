@@ -12,6 +12,11 @@ Raw sequencing files are available from [GEO]().
 ### Preparing genome annotation and index files
 C. elegans genomic sequences and annotation files (WS268) were downloaded from the [Wormbase](https://wormbase.org/).
 
+| files                                       | MD5 check sum (unzipped)         | Description              |
+| ------------------------------------------- |:--------------------------------:| -------------------------|
+| c_elegans.PRJNA13758.WS268.annotations.gff3 | 2b353175bf6e8410815aede3a77a8a62 | annotation               |
+| c_elegans.PRJNA13758.WS268.genomic.fa       | d570defcdc006a7c2859fc92dbb21bc4 | Genome sequence          |
+
 
 <details><summary><b>Building necessary index files</b></summary>
   
