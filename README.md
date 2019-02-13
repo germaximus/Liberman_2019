@@ -61,5 +61,5 @@ bowtie -p 36 --un filtered.fastq ./bowtie-1.2.1.1/Elegans_indices/Elegans_rRNA t
 |2CD37       |  21317358              |   59.35            |  8664500              |
 |4CD37       |  16801168              |   57.87            |  7078945              |  
 
-<img src="Figures/RiboSeq_Summary_statistics.png" width="400"> 
+<img src="Figures/RiboSeq_Summary_statistics.png" width="600"> 
 </details>
