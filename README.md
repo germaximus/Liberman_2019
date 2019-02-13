@@ -42,4 +42,19 @@ cutadapt -j 20 -m 23 -a TGGAATTCTCGGGTGCCAAGG -o out.fastq input.fq.gz
 ```bash
 bowtie -p 36 --un filtered.fastq ./bowtie-1.2.1.1/Elegans_indices/Elegans_rRNA trimmed.fastq >/dev/null
 ```
+|   sample   |   total number reads   |   rRNA + PhiX [%]  | number of footprints  |
+|1WT20       |  29931496              |   25.51            |  22296445             |
+|2WT20       |  26428417              |   41.50            |  15460677             |
+|4WT20       |  22083711              |   23.88            |  16809424             |
+|1WT37       |  18893098              |   91.37            |  1630864              |
+|2WT37       |  27558119              |   50.91            |  13528926             |
+|4WT37       |  18328652              |   50.20            |  9126816              |
+|1CD20       |  31528904              |   29.90            |  22101589             |
+|2CD20       |  26507787              |   46.05            |  14300563             |
+|4CD20       |  18448868              |   25.54            |  13737481             |
+|1CD37       |  15408038              |   60.19            |  6134583              |
+|2CD37       |  21317358              |   59.35            |  8664500              |
+|4CD37       |  16801168              |   57.87            |  7078945              |  
+
+
 </details>
