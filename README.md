@@ -44,8 +44,8 @@ bowtie -p 36 --un filtered.fastq ./bowtie-1.2.1.1/Elegans_indices/Elegans_rRNA t
 ```
 </details>
 
-<details><summary><b>Sequencing summary statistics</b></summary>
-  
+<details><summary><b>Ribo-seq Sequencing Summary Statistics</b></summary>
+
 |   sample   |   total number of reads   |   rRNA + PhiX [%]  | number of footprints  |
 |:---------: |:----------------------:|:------------------:|:---------------------:|
 |1WT20       |  29931496              |   25.51            |  22296445             |
