@@ -27,7 +27,7 @@ bowtie-build Elegans_rRNA.fa ./Elegans_indices/Elegans_rRNA
 
 
 
-### Sequencing reads filtering and mapping   
+### Ribo-seq Sequencing reads filtering and mapping   
 <details><summary><b>Illumina adapter trimming.</b></summary>
 
 ```bash
@@ -61,5 +61,13 @@ bowtie -p 36 --un filtered.fastq ./bowtie-1.2.1.1/Elegans_indices/Elegans_rRNA t
 |2CD37       |  21317358              |   59.35            |  8664500              |
 |4CD37       |  16801168              |   57.87            |  7078945              |  
 
-<img src="Figures/RiboSeq_Summary_statistics.png" width="600"> 
+<img src="Figures/RiboSeq_Summary_statistics1.png" width="600">
+
+First round of sequencing revealed that sample 1WT37 yeilded low number of ribosomal footprints. Therefore, we re-sequenced this sample to increase the coverage. XXX million reads were added.  
+
+<img src="Figures/RiboSeq_Summary_statistics2.png" width="600">
+
 </details>
+
+
+
