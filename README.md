@@ -63,7 +63,7 @@ bowtie -p 36 --un filtered.fastq ./bowtie-1.2.1.1/Elegans_indices/Elegans_rRNA t
 
 <img src="Figures/RiboSeq_Summary_statistics1.png" width="600">
 
-First round of sequencing revealed that sample 1WT37 yeilded low number of ribosomal footprints. Therefore, we re-sequenced this sample to increase the coverage. XXX million reads were added.  
+First round of sequencing revealed that sample 1WT37 yeilded low number of ribosomal footprints. Therefore, we re-sequenced this sample to increase the coverage.   
 
 <img src="Figures/RiboSeq_Summary_statistics2.png" width="600">
 
