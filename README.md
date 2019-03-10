@@ -171,9 +171,13 @@ cutadapt -j 20 -m 75 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -A AGATCGGAAGAGCGTCGT
 ```
 </details>
 
-<details><summary><b>Build human genomic index for STAR.</b></summary>
+<details><summary><b>Read mapping and counting with STAR.</b></summary>
      
 ```bash
-STAR --runThreadN 40 --runMode genomeGenerate --genomeDir ./Nematode_index/ --genomeFastaFiles ./GRCh38.p12.custom.fna --sjdbGTFfile ./GRCh38.p12.Refseq.coding.gtf --sjdbGTFtagExonParentTranscript Parent --sjdbOverhang 149
+STAR --genomeLoad LoadAndExit --genomeDir ../STAR-2.6.1d/Elegans_index/ 	# load genome once in the shared memory
+STAR --runThreadN 40 --outSAMtype BAM Unsorted --outSAMmultNmax 1 --quantMode GeneCounts --genomeLoad LoadAndKeep --genomeDir ../STAR-2.6.1d/Elegans_index/ --readFilesIn trimmed_1.fastq trimmed_2.fastq --outFileNamePrefix ./OUT_folder 
+STAR --genomeLoad Remove 	# remove loaded genome from shared memory
+# ipcs - check shared memory consumption
+# ipcrm - remove object from shared memory
 ```
 </details>
