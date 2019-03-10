@@ -26,6 +26,97 @@ bowtie-build Elegans_rRNA.fa ./Elegans_indices/Elegans_rRNA
 </details>
 
 
+<details><summary><b>Edit chromosome names in GRCh38.p12.fna genome file.</b></summary>
+ 
+```R
+library(data.table)
+library(magrittr)
+library(rstudioapi)
+library(stringr)
+setwd(dirname(getActiveDocumentContext()$path))
+
+#------------------------------------------ Define some useful functions -------------------------------------------------------------
+# creates a 2-column table with children->parent linkages. Takes original gff annotation as its argument.
+linkage <- function(gff) { 
+  output <- apply(gff, 1, function(x) {
+     type   <- x[3]
+     id     <- str_match(x[9], 'ID=([^;]+)')[[2]]
+     parent <- str_match(x[9], 'Parent=([^;,]+)')[[2]]
+     return(c(type, id, parent))
+  })
+  
+  output <- t(output)
+  colnames(output) <- c('Type', 'ID', 'Parent')
+  output[is.na(output[, 'Parent']), 'Parent'] <- 'Primary'
+  
+  # sometimes feature have no ID. In that case generate a unique ID as 'generatedID' + [line number]
+  extendedID <- sapply(1:nrow(output), function(x) {
+            if(is.na(output[x, 'ID'])) { new_id <- paste0('generatedID_',x); return(new_id)}
+            else {return(output[x, 'ID'])}
+  })
+  
+  output <- data.table('type' = output[, 'Type'], 'ID' = extendedID, 'Parent' = output[, 'Parent'], 'status' = rep('keep', nrow(output)), stringsAsFactors = FALSE)
+  return(output)
+}
+
+removeFeatures <- function(gff, parentsTable, featureType){
+  #find a top parent (usually a gene name) of every feature you want to remove
+  topParents <- c() 
+  features <- parentsTable[featureType, on = 'type', ID]
+  while(TRUE) {
+    candidates <- parentsTable[features, on = 'ID', Parent]
+    topParents <- union(topParents, features[candidates == 'Primary'])
+    candidates <- candidates[candidates != 'Primary' & !is.na(candidates)]
+    if(length(candidates) == 0) { break }
+    features   <- parentsTable[candidates, on = 'ID', ID]
+  }
+  
+  # remove all children of the corresponding top parents
+  parentsTable[topParents, on = 'ID', status := 'remove']
+  children  <- parentsTable[topParents, on = 'Parent', ID]
+  while(length(children) > 0) {
+    parentsTable[children, on = 'ID', status := 'remove']
+    children <- parentsTable[parentsTable$Parent %in% children, ID]
+  }
+  
+  annotation <- gff[parentsTable[, status] %in% 'keep', ]
+  return(annotation)
+}
+#-------------------------------------------------------------------------------------------------------------------------------------
+# Load GFF annotation file
+gff  <- fread(file="../Original/c_elegans.PRJNA13758.WS268.annotations.gff3", skip = 8, stringsAsFactors = F, header = F, fill = T, na.strings = c("", "NA"), sep="\t") %>% na.omit() #deals with unwanted #comment lines in the gff
+gff  <- gff[grepl('ID=|Parent=', gff$V9), ]  # discard feature with no ID in the attributes field. These are typically things like SNPs, TF-binding sites and other genomic features.
+gff  <- gff[gff$V2 == 'WormBase', ]          # discard predictions and non-curated junk
+
+# con <- file("../Original/c_elegans.PRJNA13758.WS268.annotations.gff3", "r")
+# header <- readLines(con, n = 8)
+# write.table(header, file = "Wormbase.gff", col.names = F, row.names = F, quote = F)
+# write.table(gff, file = "Wormbase.gff", sep = "\t", row.names = F, col.names = F, quote = F, append = T)
+# close(con); rm(con)
+
+parentsTable <- linkage(gff)
+setindex(parentsTable, 'ID')
+setindex(parentsTable, 'Parent')
+setindex(parentsTable, 'type')
+
+# Remove non-coding features
+gff2 <- removeFeatures(gff, featureType = c( 'antisense_RNA','nc_primary_transcript','snRNA','lincRNA','ncRNA','tRNA','pre_miRNA','miRNA','scRNA','snoRNA', 'pseudogenic_tRNA', 'piRNA', 'pseudogenic_transcript', 'pseudogenic_rRNA','rRNA'), parentsTable = parentsTable)
+
+# con <- file("../Original/c_elegans.PRJNA13758.WS268.annotations.gff3", "r")
+# header <- readLines(con, n = 8)
+# write.table(header, file = "WS268_Wormbase_coding.gff", col.names = F, row.names = F, quote = F)
+# write.table(gff2, file = "WS268_Wormbase_coding.gff", sep = "\t", row.names = F, col.names = F, quote = F, append = T)
+# close(con); rm(con)
+```
+</details>
+
+<details><summary><b>Convert annotation from GFF3 to GTF format.</b></summary>  
+     
+```bash
+gffread WS268_Wormbase_coding.gff -T -o WS268_Wormbase_coding.gtf
+# -T          - convert gff/gtf
+```
+</details>
 
 ### Ribo-seq sequencing reads filtering and mapping   
 <details><summary><b>Illumina adapter trimming.</b></summary>
@@ -78,3 +169,9 @@ cutadapt -j 20 -m 75 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -A AGATCGGAAGAGCGTCGT
 ```
 </details>
 
+<details><summary><b>Build human genomic index for STAR.</b></summary>
+     
+```bash
+STAR --runThreadN 40 --runMode genomeGenerate --genomeDir ./Nematode_index/ --genomeFastaFiles ./GRCh38.p12.custom.fna --sjdbGTFfile ./GRCh38.p12.Refseq.coding.gtf --sjdbGTFtagExonParentTranscript Parent --sjdbOverhang 149
+```
+</details>
