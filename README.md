@@ -26,7 +26,8 @@ bowtie-build Elegans_rRNA.fa ./Elegans_indices/Elegans_rRNA
 </details>
 
 
-<details><summary><b>Edit chromosome names in GRCh38.p12.fna genome file.</b></summary>
+<details><summary><b>Prepare custom genomic annotation</b></summary>
+Keep only 'Wormbase' feature types for C. elegans (manually curated). Discard other types (usually predicted or related to other nematode species). Drop annotation of non-coding features such as miRNA and pseudogenes.
  
 ```R
 library(data.table)
