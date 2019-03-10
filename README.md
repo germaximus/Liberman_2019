@@ -18,10 +18,13 @@ C. elegans genomic sequences and annotation files (WS268) were downloaded from t
 | c_elegans.PRJNA13758.WS268.genomic.fa       | d570defcdc006a7c2859fc92dbb21bc4 | Genome sequence          |
 
 
-<details><summary><b>Building necessary index files</b></summary>
+<details><summary><b>Building genomic and rDNA index files</b></summary>
   
 ```bash  
+# rDNA indexing for Bowtie
 bowtie-build Elegans_rRNA.fa ./Elegans_indices/Elegans_rRNA  
+# Genome indexing for STAR
+STAR --runThreadN 40 --runMode genomeGenerate --genomeDir ./Elegans_index/ --genomeFastaFiles ./c_elegans.PRJNA13758.WS268.genomic.fa --sjdbGTFfile ./WS268_Wormbase_coding.gff --sjdbGTFtagExonParentTranscript Parent 
 ```
 </details>
 
@@ -111,7 +114,7 @@ gff2 <- removeFeatures(gff, featureType = c( 'antisense_RNA','nc_primary_transcr
 ```
 </details>
 
-<details><summary><b>Convert annotation from GFF3 to GTF format.</b></summary>  
+<details><summary><b>Convert annotation from GFF3 to GTF format</b></summary>  
      
 ```bash
 gffread WS268_Wormbase_coding.gff -T -o WS268_Wormbase_coding.gtf
