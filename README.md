@@ -17,18 +17,6 @@ C. elegans genomic sequences and annotation files (WS268) were downloaded from t
 | c_elegans.PRJNA13758.WS268.annotations.gff3 | 2b353175bf6e8410815aede3a77a8a62 | annotation               |
 | c_elegans.PRJNA13758.WS268.genomic.fa       | d570defcdc006a7c2859fc92dbb21bc4 | Genome sequence          |
 
-
-<details><summary><b>Building genomic and rDNA index files</b></summary>
-  
-```bash  
-# rDNA indexing for Bowtie
-bowtie-build Elegans_rRNA.fa ./Elegans_indices/Elegans_rRNA  
-# Genome indexing for STAR
-STAR --runThreadN 40 --runMode genomeGenerate --genomeDir ./Elegans_index/ --genomeFastaFiles ./c_elegans.PRJNA13758.WS268.genomic.fa --sjdbGTFfile ./WS268_Wormbase_coding.gff --sjdbGTFtagExonParentTranscript Parent 
-```
-</details>
-
-
 <details><summary><b>Prepare custom genomic annotation</b></summary>
 Keep only 'Wormbase' feature types for C. elegans (manually curated). Discard other types (usually predicted or related to other nematode species). Drop annotation of non-coding features such as miRNA and pseudogenes.
  
@@ -119,6 +107,16 @@ gff2 <- removeFeatures(gff, featureType = c( 'antisense_RNA','nc_primary_transcr
 ```bash
 gffread WS268_Wormbase_coding.gff3 -T -o WS268_Wormbase_coding.gtf
 # -T          - convert gff/gtf
+```
+</details>
+
+<details><summary><b>Building genomic and rDNA index files</b></summary>
+  
+```bash  
+# rDNA indexing for Bowtie
+bowtie-build Elegans_rRNA.fa ./Elegans_indices/Elegans_rRNA  
+# Genome indexing for STAR
+STAR --runThreadN 40 --runMode genomeGenerate --genomeDir ./Elegans_index/ --genomeFastaFiles ./c_elegans.PRJNA13758.WS268.genomic.fa --sjdbGTFfile ./WS268_Wormbase_coding.gff --sjdbGTFtagExonParentTranscript Parent 
 ```
 </details>
 
