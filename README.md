@@ -108,8 +108,8 @@ gff2 <- removeFeatures(gff, featureType = c( 'antisense_RNA','nc_primary_transcr
 
 # con <- file("../Original/c_elegans.PRJNA13758.WS268.annotations.gff3", "r")
 # header <- readLines(con, n = 8)
-# write.table(header, file = "WS268_Wormbase_coding.gff", col.names = F, row.names = F, quote = F)
-# write.table(gff2, file = "WS268_Wormbase_coding.gff", sep = "\t", row.names = F, col.names = F, quote = F, append = T)
+# write.table(header, file = "WS268_Wormbase_coding.gff3", col.names = F, row.names = F, quote = F)
+# write.table(gff2, file = "WS268_Wormbase_coding.gff3", sep = "\t", row.names = F, col.names = F, quote = F, append = T)
 # close(con); rm(con)
 ```
 </details>
@@ -117,7 +117,7 @@ gff2 <- removeFeatures(gff, featureType = c( 'antisense_RNA','nc_primary_transcr
 <details><summary><b>Convert annotation from GFF3 to GTF format</b></summary>  
      
 ```bash
-gffread WS268_Wormbase_coding.gff -T -o WS268_Wormbase_coding.gtf
+gffread WS268_Wormbase_coding.gff3 -T -o WS268_Wormbase_coding.gtf
 # -T          - convert gff/gtf
 ```
 </details>
