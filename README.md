@@ -205,11 +205,11 @@ Code is available in **DataAnalysis.R** script
 </details>
 
 <details><summary><b>Principal component analysis</b></summary>
+ 
 mRNA-seq on the left and Ribo-seq on the right.  
 
-
-<img src="Figures/PCA_mRNAseq.png" width="400"> 
-<img src="Figures/PCA_riboSeq.png" width="400">     
+<img src="Figures/PCA_mRNAseq.png" width="400"><img src="Figures/PCA_riboSeq.png" width="400"> 
+    
 </details>
 
 <details><summary><b>Sample Clustering Heatmaps</b></summary>
