@@ -201,7 +201,7 @@ Code is available in **DataAnalysis.R** script
 </details>
 
 <details><summary><b>Ribo-seq scatterplots</b></summary> 
-<img src="Figures/MatrixPlot_riboseq.png">     
+<img src="Figures/MatrixPlot_Riboseq.png">     
 </details>
 
 <details><summary><b>Principal component analysis</b></summary> 
