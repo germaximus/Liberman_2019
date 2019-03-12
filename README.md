@@ -172,8 +172,6 @@ STAR --genomeLoad Remove 	# remove loaded genome from shared memory
 ```
 </details>
 
-
-
 ### mRNA-seq sequencing reads filtering and mapping   
 <details><summary><b>Illumina adapters trimming.</b></summary>
 
@@ -193,4 +191,25 @@ STAR --genomeLoad Remove 	# remove loaded genome from shared memory
 # ipcs - check shared memory consumption
 # ipcrm - remove object from shared memory
 ```
+</details>
+
+
+### Sample clustering, quality checks  
+Code is available in **DataAnalysis.R** script  
+<details><summary><b>mRNA-seq scatterplots</b></summary> 
+<img src="Figures/MatrixPlot_mRNAseq.png">     
+</details>
+
+<details><summary><b>Ribo-seq scatterplots</b></summary> 
+<img src="Figures/MatrixPlot_riboseq.png">     
+</details>
+
+<details><summary><b>Principal component analysis</b></summary> 
+<img src="Figures/PCA_mRNAseq.png" width="400"> 
+<img src="Figures/PCA_riboSeq.png" width="400">     
+</details>
+
+<details><summary><b>Heatmaps</b></summary>
+<img src="Figures/CorrelationHeatmap_mRNAseq.png" width="400"> 
+<img src="Figures/CorrelationHeatmap_riboSeq.png" width="400">     
 </details>
