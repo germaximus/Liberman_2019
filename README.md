@@ -161,7 +161,7 @@ First round of sequencing revealed that sample 1WT37 yeilded low number of ribos
 <img src="Figures/RiboSeq_Summary_statistics2.png" width="600">
 </details>
 
-<details><summary><b>Read mapping and counting with STAR.</b></summary>
+<details><summary><b>Read mapping and counting with STAR</b></summary>
      
 ```bash
 STAR --genomeLoad LoadAndExit --genomeDir ../STAR-2.6.1d/Elegans_index/ 	# load genome once in the shared memory
@@ -173,7 +173,7 @@ STAR --genomeLoad Remove 	# remove loaded genome from shared memory
 </details>
 
 ### mRNA-seq sequencing reads filtering and mapping   
-<details><summary><b>Illumina adapters trimming.</b></summary>
+<details><summary><b>Illumina adapters trimming</b></summary>
 
 ```bash
 cutadapt -j 20 -m 75 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT -o trimmed_1.fq.gz -p trimmed_2.fq.gz read.1.fq.gz read.2.fq.gz
@@ -182,7 +182,7 @@ cutadapt -j 20 -m 75 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC -A AGATCGGAAGAGCGTCGT
 ```
 </details>
 
-<details><summary><b>Read mapping and counting with STAR.</b></summary>
+<details><summary><b>Read mapping and counting with STAR</b></summary>
      
 ```bash
 STAR --genomeLoad LoadAndExit --genomeDir ../STAR-2.6.1d/Elegans_index/ 	# load genome once in the shared memory
