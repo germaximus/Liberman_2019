@@ -220,3 +220,11 @@ mRNA-seq on the left and Ribo-seq on the right.
 <img src="Figures/CorrelationHeatmap_mRNAseq.png" width="400"> 
 <img src="Figures/CorrelationHeatmap_riboSeq.png" width="400">     
 </details>
+
+<details><summary><b>Heatmap clustering of genes</b></summary>
+     
+mRNA-seq on the left and Ribo-seq on the right. 
+
+<img src="Figures/GenesHeatmap_mRNAseq.png" width="400"> 
+<img src="GenesHeatmap_riboSeq.png" width="400">    
+</details>
