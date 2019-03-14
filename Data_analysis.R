@@ -152,8 +152,38 @@ dev.off()
 
 
 
+###############################################################################################################################
+###################################   Differential Gene Expression Analysis   #################################################
+###############################################################################################################################
+
+colData <- data.frame(sample = colnames(mrnaCounts),
+                      strain = factor(c(rep("WT", 6), rep("CD", 6)), levels = c("WT","CD")),
+                      temperature = factor(c(rep('20', 3), rep('37', 3), rep('20', 3), rep('37', 3)), levels = c("20","37")),
+                      stringsAsFactors = FALSE
+)
+
+dds <- DESeqDataSetFromMatrix(countData = mrnaCounts, colData = colData, design =~ strain + temperature + temperature:strain)
+dds <- dds[rowMeans(counts(dds)) >= 10, ]
+dds <- DESeq(dds)
 
 
+resultsNames(dds)
+
+result1 <-  results(dds, name = 'temperature_37_vs_20', cooksCutoff = FALSE, independentFiltering = FALSE)
+result2 <-  results(dds, name = 'strain_CD_vs_WT', cooksCutoff = FALSE, independentFiltering = FALSE)
+result3 <-  results(dds, name = 'strainCD.temperature37', cooksCutoff = FALSE, independentFiltering = FALSE)
+summary(result1)
+summary(result2)
+summary(result3)
+
+result1 <- result1[order(result1$padj),]
+result2 <- result2[order(result2$padj),]
+result3 <- result3[order(result3$padj),]
+
+
+
+write.csv(result1, file="temperature_37_vs_20.csv")
+write.csv(result2, file="strain_CD_vs_WT.csv")
 
 
 
