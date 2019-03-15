@@ -207,7 +207,7 @@ Code is available in **DataAnalysis.R** script
 <details><summary><b>Principal component analysis</b></summary>
  
 mRNA-seq on the left and Ribo-seq on the right. Samples are separated into 2 clusters by the temperature, but they are not searated by the strain. Subsequent DE analysis indentifies only 9 genes different between the WT and CD strains (mRNAseq subset).  
-Gene expression was modelled as *expression ~ b0 + b1\*strain + b2\*temperature + b3\*strain\*temperature*  
+Gene expression was modelled as *expression ~ b0 + b1\*strain + b2\*temperature + b3\*strain\*temperature* and statistical significance accessed by the DESeq2 package in R.  
 None of the genes had a significant outcome in the interaction term. **Conclusion:** there are no statistically significant genes that are differentially expressed between strains when controlled for the temperature.   
 
 <img src="Figures/PCA_mRNAseq.png" width="400">
