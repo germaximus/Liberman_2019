@@ -6,7 +6,7 @@
 [gffread utility](http://ccb.jhu.edu/software/stringtie/gff.shtml)  
 Transcriptome samples were sequenced in paired-end 150 nt mode on Illumina sequencer.
 Ribosome profiling samples were prepared with Illumina Small RNA TruSeq kit and sequenced in single-end 50 nt mode on Illumina sequencer.
-Raw sequencing files are available from [GEO]().
+Raw sequencing files are available from [GEO GSE131269](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE131269).  
 
 
 ### Preparing genome annotation and index files
